@@ -72,7 +72,7 @@ if (!function_exists('mb_substr')) {
 
 
 /* default option values */
-define ('HOME_EXCERPT_LENGTH', 300);
+define ('HOME_EXCERPT_LENGTH', 150);
 define ('ARCHIVE_EXCERPT_LENGTH', 150);
 define ('ALLOWD_TAG', '<a><b><blockquote><br><cite><code><dd><del><div><dl><dt><em><h1><h2><h3><h4><h5><h6><i><img><li><ol><p><pre><span><strong><ul>');
 define ('READ_MORE_LINK', __( 'Read more', 'wp-utf8-excerpt') );
@@ -168,7 +168,7 @@ if (!function_exists('utf8_excerpt')) {
 		if(($length > mb_strlen(strip_tags($text), 'utf-8')) && ($strip_short_post === true) ) {
 			$text = strip_tags($text, $allowd_tag); 		
 			$text = trim($text);
-			//$text = utf8_excerpt_readmore ($text);
+			$text = utf8_excerpt_readmore ($text);
 			return $text;
 		}
 		
@@ -213,13 +213,12 @@ if (!function_exists('utf8_excerpt_readmore')) {
 		$read_more_link = get_option('read_more_link') ? get_option('read_more_link') : READ_MORE_LINK;
 		
 		//add read_more_link
-		$text .= "[......]";
+		$text .= "......";
 		$text = force_balance_tags($text);
-		$text .= "<p class='read-more'><a href='".get_permalink()."'>".$read_more_link."</a></p>";
+		//$text .= "<p class='read-more'><a href='".get_permalink()."'>".$read_more_link."</a></p>";
 		return $text;
 	}
 }
-
 
 //hook on the_excerpt hook
 if (!function_exists('utf8_excerpt_for_excerpt')) {
